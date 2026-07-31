@@ -112,8 +112,8 @@ You can log in instantly using the quick connect buttons on the login screen or 
   * **Email**: `tejashree@gmail.com`
   * **Password**: `123456`
 * **User 4 (Test)**
-  * **Email**:'test@gmail.com'
-  * **Password**: 'Test1234'
+  * **Email**:`test@gmail.com`
+  * **Password**: '`Test123`
 
 ---
 
