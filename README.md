@@ -1,30 +1,121 @@
 # CollabDoc - Collaborative Document Editor
 
-CollabDoc is a production-quality, full-stack collaborative rich-text document editor inspired by Google Docs. The application is built with a React + Vite frontend and a Node.js + Express backend. Data is persisted in a MySQL database with a built-in zero-configuration local SQLite fallback for seamless out-of-the-box operation.
-
-## Features
-
-1. **Authentication**: JWT-based login system with seeded users (`alice@test.com` and `bob@test.com`). Tokens are stored in localStorage, and all editing routes are secure.
-2. **Dashboard**: Sleek panel listing owned documents and documents shared with you, search capabilities, delete options, and dynamic file creation.
-3. **Rich Text Editor**: Powered by TipTap, supporting standard formatting (bold, italic, underline, headers, bullet/ordered lists) and automated background auto-saving (every 5 seconds) alongside explicit saves.
-4. **Document Access Control**: Real-time permission evaluation. If a user is shared with read-only access (Viewer), editing and renaming features are disabled.
-5. **File Import**: Converts local `.txt` and `.md` files into editable online documents automatically upon upload.
-6. **Sharing System**: Owners can share documents with other users by email and configure Viewer (read-only) or Editor (read-write) status.
-7. **Responsive Design**: Designed with glassmorphism aesthetics using Tailwind CSS, featuring collapsible drawers and overlays for mobile viewports.
+CollabDoc is a production-quality, full-stack collaborative rich-text document editor inspired by Google Docs. The application is built with a React + Vite frontend and a Node.js + Express backend. Data is persisted in a MySQL database with a built-in zero-configuration SQLite fallback for seamless local development.
 
 ---
 
-## Tech Stack
+# 🚀 Live Demo
 
-* **Frontend**: React (Vite), React Router DOM, Axios, Tailwind CSS, TipTap Rich Text Editor (StarterKit, Underline), Lucide Icons.
-* **Backend**: Node.js, Express.js, Sequelize ORM, MySQL (mysql2), SQLite (sqlite3) fallback, JWT, bcryptjs, Multer.
-* **Testing**: Jest, Supertest.
+### Frontend
+https://collaborative-document-editor-k5az3wp6a.vercel.app
+
+### Backend API
+https://collaborative-document-editor-mff1.onrender.com
+
+### GitHub Repository
+https://github.com/TejashreeJadhav16/collaborative-document-editor
+
+### Demo Video
+https://drive.google.com/file/d/10Qxao1btW6JiQQlNRzd3KbjTH_bMLlzn/view?usp=sharing
 
 ---
 
-## Environment Variables
+# Features
 
-### Backend (`server/.env`)
+### Authentication
+- JWT-based login system
+- Secure password hashing using bcrypt
+- Protected routes
+- Persistent login using localStorage
+
+### Dashboard
+- View owned documents
+- View shared documents
+- Search documents
+- Create new documents
+- Delete documents
+
+### Rich Text Editor
+- Built using TipTap
+- Bold, Italic, Underline
+- Headings
+- Bullet & Ordered Lists
+- Auto Save every 5 seconds
+- Manual Save
+
+### Document Access Control
+- Owner permissions
+- Viewer (Read Only)
+- Editor (Read & Write)
+
+### File Import
+- Upload `.txt`
+- Upload `.md`
+- Automatically converts uploaded files into editable documents
+
+### Sharing System
+- Share documents by email
+- Viewer & Editor permissions
+- Secure access control
+
+### Responsive Design
+- Glassmorphism UI
+- Tailwind CSS
+- Mobile responsive
+
+---
+
+# Tech Stack
+
+## Frontend
+- React (Vite)
+- React Router DOM
+- Axios
+- Tailwind CSS
+- TipTap Rich Text Editor
+- Lucide React Icons
+
+## Backend
+- Node.js
+- Express.js
+- Sequelize ORM
+- MySQL (mysql2)
+- SQLite (Fallback)
+- JWT Authentication
+- bcryptjs
+- Multer
+
+## Testing
+- Jest
+- Supertest
+
+---
+
+# Architecture
+
+```
+React (Vite)
+      │
+      ▼
+ Express REST API
+      │
+      ▼
+ JWT Authentication
+      │
+      ▼
+ Sequelize ORM
+      │
+ ┌────┴────┐
+ ▼         ▼
+MySQL   SQLite
+```
+
+---
+
+# Environment Variables
+
+## Backend (`server/.env`)
+
 ```env
 PORT=5000
 DB_MODE=mysql
@@ -36,61 +127,74 @@ DB_NAME=collaborative_doc_editor
 JWT_SECRET=super_secret_jwt_sign_key_987654321
 NODE_ENV=development
 ```
-*Note: If `DB_MODE` is set to `mysql` but the database is unreachable or credentials fail, the server automatically initializes and connects to a fallback SQLite file (`server/database.sqlite`) to ensure instant local runtime.*
 
-### Frontend (`client/.env`)
-*(Optional)* Create a `.env` in the `client` directory to configure the backend API endpoint.
+If MySQL is unavailable, the application automatically switches to SQLite (`server/database.sqlite`) for local development.
+
+---
+
+## Frontend (`client/.env`)
+
+### Local Development
+
 ```env
 VITE_API_URL=http://localhost:5000/api
 ```
 
----
+### Production
 
-## Installation & Setup
-
-### Prerequisites
-* [Node.js](https://nodejs.org/) (v18+)
-* *Optional*: MySQL server running locally on port 3306. If no MySQL database exists, the app will run transparently on SQLite out-of-the-box.
-
-### 1. Configure and Run Backend
-1. Navigate to the backend directory:
-   ```bash
-   cd server
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Set up the `.env` configuration file. If using MySQL, make sure to create the database matching your `DB_NAME` (e.g. `CREATE DATABASE collaborative_doc_editor;`). If using SQLite, no database creation is needed.
-4. Start the backend server:
-   * Production mode: `npm start`
-   * Developer hot-reload: `npm run dev`
-
-The server will run on `http://localhost:5000` and automatically seed the database with the test users.
-
-### 2. Configure and Run Frontend
-1. Navigate to the frontend directory:
-   ```bash
-   cd ../client
-   ```
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
-3. Start the Vite development server:
-   ```bash
-   npm run dev
-   ```
-
-Open your browser and navigate to `http://localhost:5173`.
+```env
+VITE_API_URL=https://collaborative-document-editor-mff1.onrender.com/api
+```
 
 ---
 
-## Running Integration Tests
+# Installation & Setup
 
-Our backend is tested using Jest and Supertest. The test environment automatically switches to an in-memory SQLite database configuration to protect development databases.
+## Prerequisites
 
-To execute the tests:
+- Node.js (v18+)
+- MySQL (Optional)
+
+### Backend
+
+```bash
+cd server
+npm install
+npm run dev
+```
+
+or
+
+```bash
+npm start
+```
+
+Backend runs on:
+
+```
+http://localhost:5000
+```
+
+---
+
+### Frontend
+
+```bash
+cd client
+npm install
+npm run dev
+```
+
+Frontend runs on:
+
+```
+http://localhost:5173
+```
+
+---
+
+# Running Tests
+
 ```bash
 cd server
 npm test
@@ -98,27 +202,105 @@ npm test
 
 ---
 
-## Demo Credentials
+# Demo Credentials
 
-You can log in instantly using the quick connect buttons on the login screen or enter the following seeded users manually:
+### Alice
 
-* **User 1 (Alice)**
-  * **Email**: `alice@test.com`
-  * **Password**: `123456`
-* **User 2 (Bob)**
-  * **Email**: `bob@test.com`
-  * **Password**: `123456`
-* **User 3 (Tejashree)**
-  * **Email**: `tejashree@gmail.com`
-  * **Password**: `123456`
-* **User 4 (Test)**
-  * **Email**:`test@gmail.com`
-  * **Password**: '`Test123`
+Email
+
+```
+alice@test.com
+```
+
+Password
+
+```
+123456
+```
 
 ---
 
-## Future Improvements
+### Bob
 
-* **Websockets (Socket.io)**: Support multi-user collaborative cursor editing (OT or CRDTs like Yjs) so editors see active updates character-by-character.
-* **Document History**: Track document revision history, allowing users to restore previous versions.
-* **Comments & Mentions**: Enable adding comment threads to selected text inside the editor.
+Email
+
+```
+bob@test.com
+```
+
+Password
+
+```
+123456
+```
+
+---
+
+### Tejashree
+
+Email
+
+```
+tejashree@gmail.com
+```
+
+Password
+
+```
+123456
+```
+
+---
+
+### Test User
+
+Email
+
+```
+test@gmail.com
+```
+
+Password
+
+```
+Test123
+```
+
+---
+
+# AI Assistance
+
+AI tools were used during development for:
+
+- Project planning
+- Code generation
+- UI improvements
+- Debugging
+- Documentation
+- Deployment troubleshooting
+
+All generated code was reviewed, tested, modified, and integrated manually.
+
+---
+
+# Future Improvements
+
+- Real-time collaboration using Socket.io
+- CRDT/Yjs integration
+- Document Version History
+- Comments & Mentions
+- Real-time Notifications
+- Export as PDF/DOCX
+- Dark/Light Theme
+- Activity Logs
+- Email Notifications
+- User Profile Management
+
+---
+
+# Author
+
+**Tejashree Jadhav**
+
+GitHub:
+https://github.com/TejashreeJadhav16
