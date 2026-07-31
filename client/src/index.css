@@ -1,0 +1,135 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+
+@import "tailwindcss";
+@config "../tailwind.config.cjs";
+
+@layer base {
+  body {
+    @apply bg-slate-950 text-slate-100 font-sans antialiased selection:bg-brand-500 selection:text-white;
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  @apply bg-slate-900;
+}
+::-webkit-scrollbar-thumb {
+  @apply bg-slate-700 rounded hover:bg-slate-600 transition-colors;
+}
+
+/* Glassmorphism utility */
+.glass-panel {
+  @apply bg-slate-900/60 backdrop-blur-md border border-slate-800/80;
+}
+
+.glass-card {
+  @apply bg-slate-900/40 backdrop-blur-sm border border-slate-800/60 hover:border-brand-500/30 transition-all duration-300;
+}
+
+/* Tiptap Editor Styling (Google Docs Style White Page) */
+.ProseMirror {
+  @apply min-h-[900px] outline-none text-slate-800 px-4 py-2 font-sans;
+}
+
+.ProseMirror p {
+  @apply mb-4 leading-relaxed text-slate-700;
+}
+
+.ProseMirror h1 {
+  @apply text-3xl font-bold text-slate-900 mb-6 mt-6 border-b border-slate-200 pb-2;
+}
+
+.ProseMirror h2 {
+  @apply text-2xl font-bold text-slate-900 mb-4 mt-5;
+}
+
+.ProseMirror h3 {
+  @apply text-xl font-semibold text-slate-800 mb-3 mt-4;
+}
+
+.ProseMirror ul {
+  @apply list-disc mb-4 pl-6 space-y-1 text-slate-700;
+}
+
+.ProseMirror ol {
+  @apply list-decimal mb-4 pl-6 space-y-1 text-slate-700;
+}
+
+.ProseMirror li p {
+  display: inline;
+}
+
+.ProseMirror blockquote {
+  @apply border-l-4 border-brand-500 pl-4 italic text-slate-500 my-4 bg-slate-50 py-2 pr-4 rounded-r-lg;
+}
+
+.ProseMirror pre {
+  @apply bg-slate-50 p-4 rounded-lg font-mono text-sm text-brand-700 overflow-x-auto mb-4 border border-slate-200;
+}
+
+.ProseMirror code {
+  @apply bg-slate-100 px-1.5 py-0.5 rounded font-mono text-xs text-brand-700 border border-slate-200;
+}
+
+.ProseMirror u {
+  @apply underline decoration-brand-500 decoration-2 underline-offset-2;
+}
+
+.ProseMirror hr {
+  border: none;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+  height: 32px;
+  background: #020617; /* Matches workspace bg-slate-950 */
+  margin: 3rem -4rem; /* Cancels px-16 padding (4rem) on each side */
+  position: relative;
+  box-shadow: inset 0 4px 6px -4px rgba(0, 0, 0, 0.15), inset 0 -4px 6px -4px rgba(0, 0, 0, 0.15);
+}
+
+/* Editor container custom shadow */
+.editor-container {
+  box-shadow: 0 4px 30px rgba(0, 0, 0, 0.4);
+}
+
+@media print {
+  /* Hide all dashboard/sidebar layout overlays */
+  body * {
+    visibility: hidden;
+  }
+  
+  /* Show only the white paper sheet */
+  .editor-container, .editor-container * {
+    visibility: visible;
+  }
+
+  .editor-container {
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 100% !important;
+    max-width: 100% !important;
+    box-shadow: none !important;
+    border: none !important;
+    padding: 0 !important;
+    margin: 0 !important;
+    min-height: auto !important;
+  }
+
+  body, html, main {
+    background: white !important;
+    color: #000000 !important;
+  }
+
+  .ProseMirror hr {
+    page-break-after: always;
+    height: 0;
+    border: none;
+    background: transparent;
+    margin: 0;
+    box-shadow: none;
+  }
+}
