@@ -3,7 +3,7 @@
 CollabDoc is a production-quality, full-stack collaborative rich-text document editor inspired by Google Docs. The application is built with a React + Vite frontend and a Node.js + Express backend. Data is persisted in a MySQL database with a built-in zero-configuration SQLite fallback for seamless local development.
 
 ---
-
+[![Architecture diagram of tejashreejadhav16/collaborative-document-editor](https://gitdiagram.com/tejashreejadhav16/collaborative-document-editor/diagram.png)](https://gitdiagram.com/tejashreejadhav16/collaborative-document-editor?utm_source=readme&utm_medium=picture)
 # 🚀 Live Demo
 
 ### Frontend
